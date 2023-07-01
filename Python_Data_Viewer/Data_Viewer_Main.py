@@ -57,7 +57,7 @@ class Data_Viewer(QtWidgets.QMainWindow, Ui_MainWindow):
         self.fileClearpushButton.clicked.connect(self.clearButtonPushed)
 
     def line_edit_init(self):
-        self.dbpathlineEdit.setText("E:/Open_Source_Data/Data1")
+        self.dbpathlineEdit.setText("E:/Open_Source_Data/fcgm3chfff-1")
 
     def setButtonCallback(self):
         print("DataBase Path “{}”".format(self.dbpathlineEdit.text()))
@@ -77,7 +77,7 @@ class Data_Viewer(QtWidgets.QMainWindow, Ui_MainWindow):
     def abcomboxChangedCallback(self):
         if not self.abcomboBox.currentText() == "":
             self.ab_id = self.abcomboBox.currentText()
-        self.to_ab_path = self.to_db_path + "/" + self.ab_id + "/" + self.ab_id
+        self.to_ab_path = self.to_db_path + "/" + self.ab_id
         dirs = os.listdir(self.to_ab_path)
         date = dirs[0]
         self.to_ab_path = self.to_ab_path + "/" + date
