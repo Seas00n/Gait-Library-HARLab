@@ -1,3 +1,4 @@
+% 此文档演示如何绘制完整的实验数据
 clear all;clc;
 init();def = defaults;%类似于头文件，初始化文件管理器
 SUBJECT = 'AB06';%选择受试者

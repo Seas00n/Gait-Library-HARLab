@@ -61,4 +61,9 @@ Marker trajectories from motion capture. Sampled at 200Hz.
 
 ## Matlab脚本基本使用方法
 参考Matlab_Data_Viewer/MyScript*.m
-
+将My_Scripts的文件放在scripts中运行
+```angular2html
+\fcgm3chfff-1\scripts\My_Script1.m
+\fcgm3chfff-1\scripts\My_Script2.m
+\fcgm3chfff-1\scripts\My_Script3.m
+```

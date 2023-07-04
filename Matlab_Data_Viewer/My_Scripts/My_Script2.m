@@ -1,3 +1,4 @@
+% 此文档演示如何划分步态
 clear all;clc;close all;
 init();def=defaults;
 subject = 'AB06';
