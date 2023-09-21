@@ -39,9 +39,9 @@ for i=1:numel(allstrides)
     stride_condition = stride.conditions;
     if strcmp(ambulationModes,'treadmill')
         if numel(unique(stride_condition.speed.Speed))>2
-            alllabels{i}='discard';%速度小，无法分类
+            alllabels{i}='discard';%跑步机速度变化不稳定，无法分类
         else
-            alllabels{i}='treadmill';%速度>2在跑步机上运动
+            alllabels{i}='treadmill';
         end
         continue;
     end
