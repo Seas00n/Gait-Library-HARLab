@@ -66,7 +66,7 @@ trials = f.EpicToolbox(allfiles);
 trial_1 = trails{1};
 ```
 
-![image-20230921102935576](D:\GitHub\Gait-Library-HARLab\assets\image-20230921102935576.png)
+![image-20230921102935576](./assets/image-20230921102935576.png)
 
 可以通过`trial_1`读取对应类型的数据
 
@@ -79,7 +79,7 @@ init();def = defaults;
 subjectLists = load(def.SUBJECT_INFO_FILE);
 ```
 
-![image-20230921105610807](D:\GitHub\Gait-Library-HARLab\assets\image-20230921105610807.png)
+![image-20230921105610807](./assets/image-20230921105610807.png)
 
 
 
