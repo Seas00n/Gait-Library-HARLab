@@ -11,7 +11,7 @@ save_path = "/media/yuxuan/SSD/DATASET/Collect/"
 filelists = os.listdir(data_path + "ik")
 num_file = len(filelists)
 
-# load speed
+# 加载速度
 speed_lists = []
 for i in range(num_file):
     condition = np.load(data_path + "conditions/" + filelists[i])
@@ -22,7 +22,7 @@ for i in range(num_file):
 print("min speed:{}".format(min(speed_lists)))
 print("max speed:{}".format(max(speed_lists)))
 
-# divide speed bands
+# 将速度区间20等分
 speed_bands = np.linspace(min(speed_lists), max(speed_lists), 20)
 speed_bands[0] -= 1e-8
 speed_bands[-1] += 1e-8
