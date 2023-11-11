@@ -1,4 +1,3 @@
-% 此文档演示如何绘制完整的实验数据
 clear all;clc;
 init();def = defaults;%类似于头文件，初始化文件管理器
 SUBJECT = 'AB06';%选择受试者
@@ -39,7 +38,7 @@ if(isfield(trial, sensor))
     else
         warning('Available Channels:');
         trial.(sensor).Properties.VariableNames'
-        error('Channel not found... please make sure the channel name is correct');
+        error('Channel not found... please make sure the channel name is correct');    
     end
 else
     warning('Available Sensors:');
