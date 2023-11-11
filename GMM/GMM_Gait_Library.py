@@ -162,6 +162,7 @@ if plot_covariances:
             ell.set_alpha(0.15)
             ell.set_color(next(colors))
             plt.gca().add_artist(ell)
+            plt.show()
 
 plt.xlabel("$x_1$")
 plt.ylabel("$x_2$")
