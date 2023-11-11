@@ -1,10 +1,8 @@
-% 此文档演示如何划分步态
 clear all;clc;close all;
 init();def=defaults;
 subject = 'AB06';
 ambulationModes ='treadmill';
-trialfile ={'treadmill_01_01.mat',
-            'treadmill_02_01.mat'};
+trialfile ={'treadmill_01_01.mat'};
 sensors={'markers','gcLeft','gcRight','conditions','ik','id','emg','imu','gon','jp'};
 %% 加载subject信息，寻找对应的mass和height，用于标准化数据
 subjectLists = load(def.SUBJECT_INFO_FILE);subjectLists = subjectLists.data;
@@ -46,8 +44,8 @@ for i=1:numel(allstrides)
         continue;
     end
 end
-%%
-[labels,~,label_idx] = unique(alllabels);%自动进行分类
+%% 
+[labels,~,label_idx] = unique(alllabels);%取出对应的strides
 for i=1:numel(labels)
     label = labels{i};
     if strcmp(label,'discard')
