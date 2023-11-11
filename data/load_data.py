@@ -9,6 +9,9 @@ def load_data(data_path, file_list, idx_band_list, kind_id_list, interp_kind='cu
         if num_chosen >= len(idx_band_list[i]):
             num_chosen = len(idx_band_list[i])
     print("load data in {} and get mean of pre {}".format(data_path, num_chosen))
+    # band: i
+    # file: j
+    # kind: k(attribute)
     for i in range(len(idx_band_list)):
         print("load band {}".format(i))
         idx_in_band_i = idx_band_list[i]
@@ -18,18 +21,17 @@ def load_data(data_path, file_list, idx_band_list, kind_id_list, interp_kind='cu
             interp_x = np.arange(np.shape(data_in_file_j)[0])
             interp_x = (interp_x - 0) / (interp_x[-1] - 0)
             interp_xx = np.linspace(0, 1, 100)
-            data_in_file_j_of_chosen_kinds_collection = []
+            data_in_file_j_after_interp = []
             for k in kind_id_list:
                 data_of_kind_k = data_in_file_j[:, k]
                 if k == 0:  # time
                     data_of_kind_k = data_of_kind_k - data_of_kind_k[0]
                 else:
-                    data_of_kind_k[-1] = data_of_kind_k[0]
+                    data_of_kind_k[-1] = data_of_kind_k[0] # start should equal to end for a gait
                 f_k = scip.interp1d(interp_x, data_of_kind_k, kind=interp_kind)
                 data_of_kind_k_yy = f_k(interp_xx)
-                data_in_file_j_of_chosen_kinds_collection.append(data_of_kind_k_yy)
-        data_in_band_i_list = np.vstack([data_in_band_i_list,
-                                         (np.array(data_in_file_j_of_chosen_kinds_collection).T).reshape((1, 100, -1))])
+                data_in_file_j_after_interp.append(data_of_kind_k_yy)
+            data_in_band_i_list = np.vstack([data_in_band_i_list,(np.array(data_in_file_j_after_interp).T).reshape((1, 100, -1))])
         data_in_band_i_list = data_in_band_i_list[1:, :]
         timeend_median = np.median(data_in_band_i_list[:, -1, 0])
         data0_median = np.median(data_in_band_i_list[:, 0, 1:], axis=0)
