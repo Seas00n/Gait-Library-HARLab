@@ -129,7 +129,7 @@ plt.subplot(121)
 plt.title("Confidence Interval from GMM")
 
 plt.plot(X[:, :, 0].T, X[:, :, 1].T, c="k", alpha=0.1)
-
+plt.show()
 means_over_time = []
 y_stds = []
 for step in t:
@@ -149,6 +149,10 @@ plt.plot(means_over_time[:, 0], means_over_time[:, 1], c="r", lw=2)
 #     means_over_time[:, 1] + 1.96 * y_stds,
 #     color="r", alpha=0.5)
 plt.show()
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 if plot_covariances:
     colors = cycle(["r", "g", "b"])
     for factor in np.linspace(0.5, 4.0, 8):
@@ -169,7 +173,7 @@ plt.ylabel("$x_2$")
 plt.subplot(122)
 plt.title("Confidence Interval from Raw Data")
 plt.plot(X[:, :, 0].T, X[:, :, 1].T, c="k", alpha=0.1)
-
+plt.show()
 plt.plot(steps, expected_mean, c="r", lw=2)
 plt.fill_between(
     steps,
