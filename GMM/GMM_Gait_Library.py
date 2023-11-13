@@ -149,10 +149,7 @@ plt.plot(means_over_time[:, 0], means_over_time[:, 1], c="r", lw=2)
 #     means_over_time[:, 1] + 1.96 * y_stds,
 #     color="r", alpha=0.5)
 plt.show()
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 if plot_covariances:
     colors = cycle(["r", "g", "b"])
     for factor in np.linspace(0.5, 4.0, 8):

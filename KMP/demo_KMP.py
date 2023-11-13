@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 from GMM.utils import *
 from KMP.utils import *
 
-save_path = "I:/Open_Source_Data/gmm_data/"
+# save_path = "I:/Open_Source_Data/gmm_data/"
+save_path = "/media/yuxuan/My Passport/Open_Source_Data/gmm_data/"
 fp_file_list = glob.glob(save_path + "*.npy")
 
 train_data_list = []
@@ -45,7 +46,7 @@ via_idx = [0, idx_max_fz_0, idx_mid, idx_max_fz_1, 99]
 via_phase = test_phase[via_idx]
 via_point = np.zeros((len(via_idx), 4))
 via_point[:, 0:2] = test_data[via_idx, :]  # n_sample*n_dim
-# via_point[:, 2:] = test_data_d[via_idx, :]  # n_sample*n_dim
+via_point[:, 2:] = test_data_d[via_idx, :]  # n_sample*n_dim
 via_var = np.eye(4) * 1e-6
 plt.scatter(via_phase, via_point[:, 0], linewidths=5)
 plt.scatter(via_phase, via_point[:, 1], linewidths=5)

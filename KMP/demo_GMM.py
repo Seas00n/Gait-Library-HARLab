@@ -6,7 +6,8 @@ from GMM.utils import *
 from KMP.utils import *
 import pickle
 
-save_path = "I:/Open_Source_Data/gmm_data/"
+# save_path = "I:/Open_Source_Data/gmm_data/"
+save_path = "/media/yuxuan/My Passport/Open_Source_Data/gmm_data/"
 fp_file_list = glob.glob(save_path + "*.npy")
 
 train_data_list = []
