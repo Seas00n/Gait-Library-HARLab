@@ -148,7 +148,7 @@ plt.plot(means_over_time[:, 0], means_over_time[:, 1], c="r", lw=2)
 #     means_over_time[:, 1] - 1.96 * y_stds,
 #     means_over_time[:, 1] + 1.96 * y_stds,
 #     color="r", alpha=0.5)
-
+plt.show()
 if plot_covariances:
     colors = cycle(["r", "g", "b"])
     for factor in np.linspace(0.5, 4.0, 8):
@@ -162,7 +162,6 @@ if plot_covariances:
             ell.set_alpha(0.15)
             ell.set_color(next(colors))
             plt.gca().add_artist(ell)
-            plt.show()
 
 plt.xlabel("$x_1$")
 plt.ylabel("$x_2$")
