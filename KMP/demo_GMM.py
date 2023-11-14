@@ -11,13 +11,17 @@ save_path = "/media/yuxuan/My Passport/Open_Source_Data/gmm_data/"
 fp_file_list = glob.glob(save_path + "*.npy")
 
 train_data_list = []
-for file in fp_file_list[0:40]:
+condition_list = []
+for file in fp_file_list:
     fp = np.load(file).T
     fp[:, 0] = np.linspace(0, 1, 100)
-    train_data_list.append(fp[:, (0, 2, 3)])  # fp[:,1] is velocity condition
-
+    condition = fp[0, 1]
+    if 1.5 > condition > 1.4:
+        train_data_list.append(fp[:, (0, 2, 3)])
+        condition_list.append(condition)
+condition_data = np.array(condition_list)
 train_data = np.array(train_data_list)
-plt.plot(train_data[:, :, 0].T, train_data[:, :, 1].T, c='k', alpha=0.1)
+plt.plot(train_data[:, :, 0].T, train_data[:, :, 1].T, c='k', alpha=0.1,label="Train Data")
 plt.plot(train_data[:, :, 0].T, train_data[:, :, 2].T, c='k', alpha=0.1)
 
 retrain_or_not = input("Train a new model or use current? [Y/n]")
@@ -30,7 +34,8 @@ else:
 phase = np.linspace(0, 1, 100)
 DataOut, SigmaOut = gmm_Interp_with_phase(gmm, phase)
 TimeOut = phase
-plt.plot(phase, DataOut[:, 0:1], c='r', lw=2, alpha=0.5)
+plt.plot(phase, DataOut[:, 0:1], c='r', lw=2, alpha=0.5,label="GMR Reference")
+plt.legend()
 plt.show()
 
 # save the beat result
