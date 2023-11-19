@@ -84,8 +84,9 @@ def kmp_estimateMatrix_mean(phase, data, sigma, kh, lamda):
             if i == j:
                 C_temp = sigma[i, :].reshape((D, D))
                 kc[i * D:(i + 1) * D, j * D:(j + 1) * D] += lamda * C_temp
-    return np.linalg.inv(kc)
-
+    U, s, Vt = np.linalg.svd(kc)
+    kc_inv = np.dot(np.dot(Vt.T, np.linalg.pinv(np.diag(s))), U.T)
+    return kc_inv
 
 def kmp_pred_mean(phase_current, phase_ref, data, kh, Kinv):
     D = np.shape(data)[1]
