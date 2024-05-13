@@ -1,0 +1,63 @@
+function [phase_vec,x_vec,y_vec] = calculate_phase_based_on_q_qint(thigh_angle)
+    thigh_angle_int = zeros(101,1);
+    mean_angle = mean(thigh_angle(1:101));
+    for i=2:101
+        thigh_angle_int(i) = thigh_angle_int(i)+thigh_angle(i)-mean_angle;
+        thigh_angle_int(i+1) = thigh_angle_int(i);
+    end 
+    thigh_angle_int(end) = thigh_angle_int(end-1)+thigh_angle(end);
+    max_int = max(thigh_angle_int);
+    min_int = min(thigh_angle_int);
+    max_q = max(thigh_angle);
+    min_q = min(thigh_angle);
+    mean_x = 0.5*(max_q+min_q);
+    mean_y = 0.5*(max_int+min_int);
+    x_y_ratio = (max_q-min_q)/(max_int-min_int);
+    phase_vec = zeros(size(thigh_angle,1),1);
+    x_vec = zeros(size(thigh_angle,1),1);
+    y_vec = zeros(size(thigh_angle,1),1);
+    thigh_angle_all=thigh_angle(1);
+    for i=2:size(thigh_angle,1)
+        x_vec(i) = thigh_angle(i);
+        y_vec(i)=thigh_angle(i)-mean_angle+y_vec(i-1);
+        thigh_angle_all = [thigh_angle_all;thigh_angle(i)];
+        
+            min_thigh_angle = min(thigh_angle_all);
+            stance_end_threshold = -29.8283;
+            condition1 = thigh_angle_all(end)<stance_end_threshold;
+        condition2 = (thigh_angle_all(end)-min_thigh_angle>2)&(min_thigh_angle>stance_end_threshold);
+            if condition1||condition2
+                state=2;
+                idx_list(1)= size(thigh_angle_all,1);
+            end
+        elseif state==2
+            max_thigh_angle = max(thigh_angle_all(idx_list(1):end));
+            swing_end_threshold = 28.3203;
+            condition1 = thigh_angle_all(end)>swing_end_threshold+1.7;
+            condition2 = (thigh_angle_all(end)<max_thigh_angle-1)&(max_thigh_angle>swing_end_threshold-2.5);
+            if condition1||condition2
+                state=1;
+                thigh_angle_all = [];
+                y_vec(i) = 0;
+                gait_over = true;
+                idx_list = [0,0];
+            end
+        end
+        val = 100*atan2( (y_vec(i)-mean_y)*x_y_ratio, (x_vec(i)-mean_x) )/2/pi ;
+        period = 100;
+        val_list = [val-period,val,val+period];
+        dist_vec = abs(val_list-phase_vec(i-1));
+        [~,min_dist_idx] = min(dist_vec);
+        phase_vec(i) = val_list(min_dist_idx);
+        if gait_over == true
+            phase_vec(i) = 0;
+        end
+    end
+    for i=1:size(thigh_angle,1)
+        if phase_vec(i)>100
+            phase_vec(i) = phase_vec(i)-100;
+        elseif phase_vec(i)<0
+            phase_vec(i) = phase_vec(i)+100;
+        end
+    end
+end

@@ -1,0 +1,23 @@
+function q_knee,q_ankle = surface_fitting(phase,v)
+    num_c = 4;
+    num_popt = 7;
+    x = readNPY('Model_Fitting\knee_beta.npy');
+    for i=1:101
+        delta_mat = cal_delta_mat();
+    end
+end
+
+function delta_mat = cal_delta_mat(si,vj,num_c,num_popt)
+    c_vec = zeros(1,num_c);
+    c_vec(1)=1;
+    for i=2:num_c
+        n=num_c-2;
+        k=i-2;
+        c_vec(i) = nchoosek(n,k)*vj^(k)*(1-vj)^(n-k);
+    end
+    b_vec = zeros(num_c,num_c*num_popt);
+    for i=1:num_c
+        b_vec(i,num_popt*(i-1)+1:num_popt*i) = si.^(num_popt-1:-1:0);
+    end
+    delta_mat = c_vec*b_vec;
+end
